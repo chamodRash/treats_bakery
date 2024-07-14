@@ -31,7 +31,7 @@ export const ProductCard = ({
   return (
     <Card className="w-[280px] h-[350px] rounded-3xl">
       <div className="w-full h-full grid grid-rows-[60%_40%]">
-        <Link href={`/product/${id}`}>
+        <Link href={`/product?product=${id}`}>
           <Image
             className="w-full h-full bg-cover bg-center object-cover p-0 rounded-t-3xl"
             src={image}

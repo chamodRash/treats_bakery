@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 
 import { getSessionUser } from "@/data/sessionUser";
@@ -12,16 +12,15 @@ import { ProductSection } from "@/components/product-section";
 export default function Home() {
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
 
-  const getDbUser = async () => {
+  const getDbUser = useCallback(async () => {
     const dbUser = await getSessionUser();
 
     setLoggedUser(dbUser as User | null);
-  };
+  }, []);
 
   useEffect(() => {
     getDbUser();
-  }, []);
-  console.log(loggedUser);
+  }, [getDbUser]);
 
   return (
     <div className="w-full">

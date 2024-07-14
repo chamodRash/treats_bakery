@@ -29,6 +29,10 @@ export const getProductById = async (id: number) => {
     .select("*")
     .eq("id", id);
 
+  if (Array.isArray(data) && data.length > 0) {
+    return data[0];
+  }
+
   return data;
 };
 

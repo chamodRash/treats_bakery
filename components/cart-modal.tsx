@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { addToCart } from "@/actions/add-to-cart";
+import { toast } from "sonner";
 
 interface CartModalProps {
   children: React.ReactNode;
@@ -35,7 +36,14 @@ export const CartModal = ({
   const [qty, setQty] = useState(1);
 
   const onsubmit = async () => {
-    await addToCart(productid, qty, price);
+    const { data, error } = await addToCart(productid, qty, price);
+
+    if (error) {
+      toast.error("Failed to add item to cart.");
+      return;
+    }
+
+    !error && toast.success("Item added to cart.");
   };
 
   return (
